@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
-import auth from './auth';
-import ListsReducer from './reducer_lists';
+import { all } from 'redux-saga/effects';
 import { reducer as formReducer } from 'redux-form';
+
+import auth from './auth';
+import { authSagas } from './auth';
+import ListsReducer from './reducer_lists';
 
 const rootReducer = combineReducers({
 	lists: ListsReducer,
@@ -9,3 +12,7 @@ const rootReducer = combineReducers({
 	auth
 });
 export default rootReducer;
+
+export function* rootSaga() {
+	yield all([...authSagas]);
+}
