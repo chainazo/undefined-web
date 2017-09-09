@@ -65,7 +65,7 @@
     }
   },
   "jest": {
-    "collectCoverageFrom": [
+    "collectCoverageForm": [
       "src/**/*.{js,jsx}"
     ],
     "setupFiles": [

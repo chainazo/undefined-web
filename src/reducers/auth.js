@@ -28,10 +28,10 @@ const Api = {
 };
 
 /**************************
- * Action Creator : Registeration
+ * Action Creator : Registration
  **************************/
 
-export function registerationRequest(data) {
+export function registrationRequest(data) {
 	const { firstName, lastName, email, password } = data;
 	return {
 		type: REGISTERATION.PENDING,
@@ -58,7 +58,7 @@ const RegisterError = error => {
 	};
 };
 
-function* RegisterationSaga(action) {
+function* RegistrationSaga(action) {
 	try {
 		const data = yield call(Api.signUp, action.payload);
 		yield put(RegisterSuccess());
@@ -67,7 +67,7 @@ function* RegisterationSaga(action) {
 	}
 }
 
-export const authSagas = [takeLatest(REGISTERATION.PENDING, RegisterationSaga)];
+export const authSagas = [takeLatest(REGISTERATION.PENDING, RegistrationSaga)];
 
 const initialState = {
 	signUpRequest: {
