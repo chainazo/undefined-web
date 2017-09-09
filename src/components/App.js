@@ -4,6 +4,7 @@ import MoimList from '../containers/MoimList'
 import MeetupDetail from '../containers/MeetupDetail'
 import Home from '../containers/Home'
 import MeetupForm from '../containers/MeetupForm';
+import Registration from '../containers/Registration';
 import '../static/styles/App.less';
 import Logo from '../static/img/logo.png';
 
@@ -31,6 +32,7 @@ class App extends Component {
           <Route exact path="/meetup/:id" component={MeetupDetail}/>
           <Route exact path="/moim/" component={MoimList}/>
           <Route exact path="/new" component={MeetupForm}/>
+          <Route exact path="/signup" component={Registration}/>
         </Switch>
 
         <footer className="page-footer transparent">
