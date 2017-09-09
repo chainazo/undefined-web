@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import SimpleMDE from 'react-simplemde-editor';
 
 const instance = axios.create({
   baseURL: 'https://m8z7h5ngq7.execute-api.ap-northeast-2.amazonaws.com/prod'
@@ -13,7 +14,14 @@ const renderDateTimePicker = ({ input: { onChange, value }, showTime }) => (
     time={showTime}
     value={!value ? null : new Date(value)}
   />
-)
+);
+
+const renderSimpleMDE = ({ input: { onChange, value } }) => (
+  <SimpleMDE
+    onChange={onChange}
+    value={value}
+  />
+);
 
 class MeetupForm extends Component {
   constructor() {
@@ -49,12 +57,12 @@ class MeetupForm extends Component {
 
           <div className="row">
             <div className="col s6">
-              <Field component={renderDateTimePicker} type="text" name="started_at"/>
               <label htmlFor="started_at">시작일시</label>
+              <Field component={renderDateTimePicker} type="text" name="started_at"/>
             </div>
             <div className="col s6">
-              <Field component={renderDateTimePicker} type="text" name="ended_at"/>
               <label htmlFor="ended_at">종료일시</label>
+              <Field component={renderDateTimePicker} type="text" name="ended_at"/>
             </div>
           </div>
 
@@ -73,9 +81,9 @@ class MeetupForm extends Component {
           </div>
 
           <div className="row">
-            <div className="input-field col s12">
-              <Field component="textarea" id="content" name="content" className="materialize-textarea"/>
+            <div className="col s12">
               <label htmlFor="content">모임 상세정보</label>
+              <Field component={renderSimpleMDE} id="content" name="content"/>
             </div>
           </div>
 
