@@ -30,7 +30,7 @@ class Registration extends Component {
 				<div>
 					<RegistrationForm
 						onSubmit={values => this.handleRegistration(values)}
-						{...this.props}
+						validateEmail={this.validateEmail}
 					/>
 				</div>
 			</div>
