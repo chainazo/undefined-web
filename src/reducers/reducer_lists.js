@@ -62,8 +62,7 @@ export default function (state = initialState, action) {
       // return { ...state, moimList: action.payload.data };
       return state;
     case FETCH_MEETUP_DETAIL:
-      // return { ...state, moimList: action.payload.data };
-      return state;
+      return { ...state, meetupDetail: action.payload.data };
     default:
       return state;
   }

@@ -11,7 +11,7 @@ export function fetchMoim() {
 }
 
 export function fetchMeetupDetail(id) {
-  const request = axios.get(`/api/moim/${id}`);
+  const request = axios.get(`/meetups/${id}`);
   return {
     type: FETCH_MEETUP_DETAIL,
     payload: request

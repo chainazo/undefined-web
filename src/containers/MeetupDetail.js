@@ -47,12 +47,12 @@ class MeetupDetail extends Component {
   };
 
   getMarkdownText() {
-    var rawMarkup = marked('This is _Markdown_.', {sanitize: true});
+    const rawMarkup = marked('This is _Markdown_.', {sanitize: true});
     return { __html: rawMarkup };
   }
 
   render () {
-    let detail = this.props.meetupDetail;
+    const detail = this.props.meetupDetail;
     return (
       <div className="container container-body">
         <div className="meetup-title-section">
