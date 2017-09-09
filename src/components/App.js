@@ -31,7 +31,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/meetups/:id" component={MeetupDetail}/>
-          <Route exact path="/meetups/:id/attendee" component={MeetupAttendee}/>
+          <Route exact path="/meetups/:id/attendees" component={MeetupAttendee}/>
           <Route exact path="/moim/" component={MoimList}/>
           <Route exact path="/new" component={MeetupForm}/>
           <Route exact path="/signup" component={Registration}/>
