@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom'
 import MoimList from '../containers/MoimList'
 import Home from '../containers/Home'
+import MeetupForm from '../containers/MeetupForm';
 import '../static/styles/App.less';
-
 class App extends Component {
   render() {
     return (
@@ -19,13 +19,13 @@ class App extends Component {
               <li><NavLink exact to="/moim/">리스트</NavLink></li>
             </ul>
             <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
-
           </div>
         </nav>
 
         <Switch>
-          <Route exact path="/moim/" component={MoimList}/>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/moim/" component={MoimList}/>
+          <Route exact path="/new" component={MeetupForm}/>
         </Switch>
 
         <footer className="page-footer transparent">
