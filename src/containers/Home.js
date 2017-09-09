@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Moim from '../components/Moim';
-import { fetchMoim } from '../actions/index';
-
-import PropTypes from 'prop-types';
+import axios from 'axios';
+import Meetup from '../components/Meetup';
 
 class Home extends Component {
+  constructor() {
+    super();
 
-  static propTypes = {
-    fetchMoim: React.PropTypes.func.isRequired,
-    moimList: React.PropTypes.array.isRequired
-  };
+    this.state = {
+      meetupList: [],
+      after: 0
+    };
 
-  componentDidMount () {
-    this.props.fetchMoim();
+    this.fetchMeetupList = this.fetchMeetupList.bind(this);
   }
 
+  componentDidMount () {
+    this.fetchMeetupList();
+  }
 
-  renderMoim () {
-    return this.props.moimList.map(moim => {
-      return <div className="col s6 m4"><Moim key={moim.id} moim={moim}/></div>;
-    });
+  fetchMeetupList() {
+    const oldList = this.state.meetupList;
+
+    axios.get(`/meetups?count=9&after=${this.state.after}`)
+      .then(res => {
+        this.setState({
+          meetupList: [ ...oldList, ...res.data.data ],
+          after: res.data.paging.after
+        });
+      });
+  }
+
+  renderMeetup () {
+    console.log(this.state.meetupList[0]);
+    return this.state.meetupList.map(meetup => (
+      <div className="col s6 m4">
+        <Meetup key={meetup.id} meetup={meetup}/>
+      </div>
+    ));
   }
 
   render () {
@@ -42,10 +58,15 @@ class Home extends Component {
         <section className="moim-list-section">
           <div className="container">
             <div className="row">
-              { this.renderMoim() }
+              { this.renderMeetup() }
             </div>
-
-
+            <div className="center-align">
+            <button
+              className="waves-effect waves-light btn"
+              onClick={this.fetchMeetupList}>
+              더 불러오기
+            </button>
+            </div>
           </div>
         </section>
       </div>
@@ -53,10 +74,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    moimList: state.lists.moimList
-  };
-};
-
-export default connect(mapStateToProps, { fetchMoim })(Home);
+export default Home;
