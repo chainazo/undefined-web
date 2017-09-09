@@ -5,10 +5,16 @@ import { reduxForm, formValueSelector } from 'redux-form';
 
 import RegisterationFrom from '../components/RegisterationFrom';
 
+// Action creators
+import { registerationRequest } from '../reducers/auth';
+
 class Registeration extends Component {
 	constructor(props) {
 		super(props);
 	}
+	static propTypes = {
+		registerationRequest: PropTypes.func.isRequired
+	};
 
 	handleRegisteration = data => {
 		this.props.registerationRequest(data);

@@ -14,7 +14,6 @@ const RegisterationFrom = ({ handleSubmit, validateEmail, handlesignIn }) => {
 						<Field name="firstName" component="input" type="text" />
 					</div>
 				</div>
-
 				<div className="col-xs-6">
 					<label htmlFor="lastName">Last Name</label>
 					<Field name="lastName" component="input" type="text" />

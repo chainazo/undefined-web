@@ -6,8 +6,9 @@ const asyncActionType = type => ({
 	SUCCESS: `auth/${type}_SUCCESS`,
 	ERROR: `auth/${type}_ERROR`
 });
-
 const REGISTERATION = asyncActionType('REGISTERATION');
+
+//TODO: MAKE URL
 const REGISTERATION_URL = 'https://';
 
 /**************************
@@ -68,19 +69,45 @@ function* RegisterationSaga(action) {
 
 export const authSagas = [takeLatest(REGISTERATION.PENDING, RegisterationSaga)];
 
-export default function(state = {}, action) {
+const initialState = {
+	signUpRequest: {
+		status: 'INIT',
+		errorCode: '',
+		errorMessage: ''
+	}
+};
+
+export default function(state = initialState, action) {
 	switch (action.type) {
 		case REGISTERATION.PENDING:
 			return {
-				...state
+				...state,
+				signUpRequest: {
+					...state.signUpRequest,
+					status: 'PENDING'
+				}
 			};
 		case REGISTERATION.SUCCESS:
 			return {
-				...state
+				...state,
+				signUpRequest: {
+					signUpRequest: {
+						...state.signUpRequest,
+						status: 'SUCCESS'
+					}
+				}
 			};
 		case REGISTERATION.ERROR:
 			return {
-				...state
+				...state,
+				signUpRequest: {
+					...state.signUpRequest,
+					errorCode: action.errorCode,
+					errorMessage: action.errorMessage,
+					status: 'ERROR'
+				}
 			};
+		default:
+			return state;
 	}
 }
