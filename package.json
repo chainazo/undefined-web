@@ -48,6 +48,7 @@
     "react-widgets": "^4.0.0",
     "react-widgets-moment": "^4.0.0",
     "redux": "^3.7.1",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.0.4",
     "redux-promise": "^0.5.3",
     "redux-saga": "^0.15.6",

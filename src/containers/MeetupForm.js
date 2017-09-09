@@ -4,10 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import SimpleMDE from 'react-simplemde-editor';
 
-const instance = axios.create({
-  baseURL: 'https://m8z7h5ngq7.execute-api.ap-northeast-2.amazonaws.com/prod'
-});
-
 const renderDateTimePicker = ({ input: { onChange, value }, showTime }) => (
   <DateTimePicker
     onChange={onChange}
@@ -31,7 +27,7 @@ class MeetupForm extends Component {
   }
 
   onSubmit(data) {
-    instance.post('/meetups', data)
+    axios.post('/meetups', data)
       .then((res) => {
         console.log(res);
       });

@@ -1,4 +1,4 @@
-import { FETCH_MOIM, FETCH_MEETUP_DETAIL } from '../actions/index';
+import { FETCH_MOIM, FETCH_MEETUP_DETAIL, FETCH_MEETUP_ATTENDEE, TEST } from '../actions/index';
 
 // const initialState = {
 //     moimList: [],
@@ -28,7 +28,9 @@ const initialState = {
     thumbnail: 'https://onoffmix.com/images/event/91161/s',
     summary: '1회 해커톤을 합니다. 내 꺼를 만드는 내꺼톤',
     moimDate: '2017-08-27',
-  }
+  },
+  attendee: [],
+  test: []
 };
 
 
@@ -40,6 +42,13 @@ export default function (state = initialState, action) {
     case FETCH_MEETUP_DETAIL:
       // return { ...state, moimList: action.payload.data };
       return state;
+    case FETCH_MEETUP_ATTENDEE:
+      return { ...state,
+        attendee: action.payload.data };
+    case TEST:
+    return { ...state,
+      test: [...state.test, action.payload]
+    };
     default:
       return state;
   }
