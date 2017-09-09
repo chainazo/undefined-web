@@ -5,7 +5,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store/configureStore'
 import createHistory from 'history/createBrowserHistory';
-import { Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
 import momentLocalizer from 'react-widgets-moment';
@@ -17,8 +17,8 @@ momentLocalizer();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={createHistory()}>
-      <Route path="/" component={App}/>
+    <Router>
+      <App/>
     </Router>
   </Provider>,
   document.getElementById('root')
