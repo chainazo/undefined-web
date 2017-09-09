@@ -1,4 +1,4 @@
-import { FETCH_MOIM, FETCH_MEETUP_DETAIL, FETCH_MEETUP_ATTENDEE, TEST } from '../actions/index';
+import { FETCH_MOIM, FETCH_MEETUP_DETAIL } from '../actions/index';
 
 // const initialState = {
 //     moimList: [],
@@ -42,13 +42,6 @@ export default function (state = initialState, action) {
     case FETCH_MEETUP_DETAIL:
       // return { ...state, moimList: action.payload.data };
       return state;
-    case FETCH_MEETUP_ATTENDEE:
-      return { ...state,
-        attendee: action.payload.data };
-    case TEST:
-    return { ...state,
-      test: [...state.test, action.payload]
-    };
     default:
       return state;
   }
