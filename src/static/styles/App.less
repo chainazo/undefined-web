@@ -17,12 +17,27 @@ body {
   }
 }
 
+.main-nav {
+  img {
+    width: 180px;
+    margin-top: 12px;
+    @media @ms-m {
+      margin-top: 16px;
+    }
+  }
+  box-shadow: 0 2px 11px 3px rgba(0, 0, 0, 0.03), 0 2px 14px 2px rgba(0, 0, 0, 0);
+}
+nav a, nav ul a {
+  color: @font-color-3;
+}
+
+
 /* INTRO(TOP SECTION) */
 .intro {
-  background: @primary;
-  .container {
-    position: relative;
-  }
+  //background: @primary;
+  //.container {
+  //  position: relative;
+  //}
 }
 
 .search-container {
