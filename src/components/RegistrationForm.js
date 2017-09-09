@@ -2,43 +2,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
-const RegistrationForm = ({ handleSubmit, validateEmail }) => {
+const RegistrationForm = ({ handleSubmit, onSubmit }) => {
 	return (
-		<form className="registration-form" handleSubmit={handleSubmit}>
-			<div className="title">Sign up</div>
+		<form className="col s6" onSubmit={handleSubmit(onSubmit)} method="POST">
+			<div className="row">
+				<h4>회원가입</h4>
+			</div>
 
 			<div className="row">
-				<div className="col-xs-6">
+				<div className="input-field col s12">
 					<div className="box">
-						<label htmlFor="firstName">First Name</label>
-						<Field name="firstName" component="input" type="text" />
+						<label htmlFor="username">이름</label>
+						<Field name="username" component="input" type="text" />
 					</div>
-				</div>
-				<div className="col-xs-6">
-					<label htmlFor="lastName">Last Name</label>
-					<Field name="lastName" component="input" type="text" />
 				</div>
 			</div>
 
 			<div className="row">
-				<div>
-					<label htmlFor="email">Email</label>
+				<div className="input-field col s12">
+					<label htmlFor="email">이메일</label>
 					<Field
 						name="email"
-						onChange={validateEmail}
+						component="input"
+						type="email"
+					/>
+				</div>
+			</div>
+
+			<div className="row">
+				<div className="input-field col s12">
+					<label htmlFor="phone">휴대폰</label>
+					<Field
+						name="phone"
 						component="input"
 						type="text"
 					/>
 				</div>
-				{false && <div>This E-mail already exists.</div>}
 			</div>
 
 			<div className="row">
-				<div>
-					<label htmlFor="password">Password</label>
+				<div className="input-field col s12">
+					<label htmlFor="password">비밀번호</label>
 					<Field
-						name="email"
-						onChange={validateEmail}
+						name="password"
 						component="input"
 						type="password"
 					/>
@@ -46,8 +52,8 @@ const RegistrationForm = ({ handleSubmit, validateEmail }) => {
 			</div>
 
 			<div className="row form-row">
-				<div>
-					<button type="submit">Sign Up</button>
+				<div className="col s12">
+					<button type="submit" className="waves-effect waves-light btn">회원가입하기</button>
 				</div>
 			</div>
 		</form>
@@ -55,8 +61,7 @@ const RegistrationForm = ({ handleSubmit, validateEmail }) => {
 };
 
 RegistrationForm.PropTypes = {
-	handleSubmit: PropTypes.func.isRequired,
-	validateEmail: PropTypes.func.isRequired
+	handleSubmit: PropTypes.func.isRequired
 };
 
 export default reduxForm({ form: 'registrationForm' })(RegistrationForm);
