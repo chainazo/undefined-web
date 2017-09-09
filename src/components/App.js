@@ -39,7 +39,7 @@ class App extends Component {
 
         <footer className="page-footer transparent">
             <div className="container">
-              <p>TEAMBURN © 2017 <a href="#">Github</a></p>
+              <p>chainazo © 2017 <a href="#">Github</a></p>
             </div>
         </footer>
       </section>
