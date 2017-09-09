@@ -45,6 +45,7 @@
     "redux": "^3.7.1",
     "redux-form": "^6.8.0",
     "redux-promise": "^0.5.3",
+    "redux-saga": "^0.15.6",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.3",
     "url-loader": "0.5.9",
@@ -64,7 +65,7 @@
     }
   },
   "jest": {
-    "collectCoverageFrom": [
+    "collectCoverageForm": [
       "src/**/*.{js,jsx}"
     ],
     "setupFiles": [
