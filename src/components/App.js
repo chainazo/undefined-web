@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link, NavLink, Route, Switch } from 'react-router-dom'
-import MoimList from '../containers/MoimList'
 import MeetupDetail from '../containers/MeetupDetail'
 import Home from '../containers/Home'
 import MeetupForm from '../containers/MeetupForm';
 import Registration from '../containers/Registration';
+import LoginForm from '../containers/Login';
 import MeetupAttendee from '../containers/MeetupAttendee';
 import '../static/styles/App.less';
 import Logo from '../static/img/logo.png';
-
 
 class App extends Component {
   render() {
@@ -39,6 +38,7 @@ class App extends Component {
           <Route exact path="/meetups/:id/attendees" component={MeetupAttendee}/>
           <Route exact path="/new" component={MeetupForm}/>
           <Route exact path="/signup" component={Registration}/>
+          <Route exact path="/login" component={LoginForm}/>
         </Switch>
 
         <footer className="page-footer transparent">
