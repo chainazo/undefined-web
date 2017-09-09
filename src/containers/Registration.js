@@ -3,10 +3,6 @@ import axios from 'axios';
 
 import RegistrationForm from '../components/RegistrationForm';
 
-const instance = axios.create({
-	baseURL: 'http://env-trueland.dbkbppqwqx.ap-northeast-2.elasticbeanstalk.com'
-});
-
 class Registration extends Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +11,7 @@ class Registration extends Component {
 	}
 
 	handleSubmit = data => {
-		instance.post('/users', data)
+		axios.post('/users', data)
 			.then(res => {
 				console.log(res);
 			});
