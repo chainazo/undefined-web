@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 
-import RegisterationFrom from '../components/RegisterationFrom';
+import RegistrationForm from '../components/RegistrationForm';
 
 // Action creators
-import { registerationRequest } from '../reducers/auth';
+import { registrationRequest } from '../reducers/auth';
 
-class Registeration extends Component {
+class Registration extends Component {
 	constructor(props) {
 		super(props);
 	}
 	static propTypes = {
-		registerationRequest: PropTypes.func.isRequired
+		registrationRequest: PropTypes.func.isRequired
 	};
 
-	handleRegisteration = data => {
-		this.props.registerationRequest(data);
+	handleRegistration = data => {
+		this.props.registrationRequest(data);
 	};
 
 	validateEmail = event => {
@@ -28,9 +28,9 @@ class Registeration extends Component {
 		return (
 			<div className="regiseration-container">
 				<div>
-					<RegisterationFrom
-						onSubmit={values => this.handleRegisteration(values)}
-						{...this.props}
+					<RegistrationForm
+						onSubmit={values => this.handleRegistration(values)}
+						validateEmail={this.validateEmail}
 					/>
 				</div>
 			</div>
@@ -38,18 +38,18 @@ class Registeration extends Component {
 	}
 }
 
-Registeration = reduxForm({
-	form: 'registeration'
-})(Registeration);
+Registration = reduxForm({
+	form: 'registration'
+})(Registration);
 
-const selector = formValueSelector('registeration'); // <-- same as form name
+const selector = formValueSelector('registration'); // <-- same as form name
 
 const mapDispatchToProps = dispatch => {
 	return {
-		registerationRequest: data => {
-			return dispatch(registerationRequest(data));
+		registrationRequest: data => {
+			return dispatch(registrationRequest(data));
 		}
 	};
 };
 
-export default connect(null, mapDispatchToProps)(Registeration);
+export default connect(null, mapDispatchToProps)(Registration);

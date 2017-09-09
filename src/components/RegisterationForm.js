@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
-const RegisterationFrom = ({ handleSubmit, validateEmail, handlesignIn }) => {
+const RegistrationForm = ({ handleSubmit, validateEmail }) => {
 	return (
-		<form className="registeration-form">
+		<form className="registration-form" handleSubmit={handleSubmit}>
 			<div className="title">Sign up</div>
 
 			<div className="row">
@@ -54,10 +54,9 @@ const RegisterationFrom = ({ handleSubmit, validateEmail, handlesignIn }) => {
 	);
 };
 
-RegisterationFrom.PropTypes = {
+RegistrationForm.PropTypes = {
 	handleSubmit: PropTypes.func.isRequired,
-	validateEmail: PropTypes.func.isRequired,
-	handlesignIn: PropTypes.func.isRequired
+	validateEmail: PropTypes.func.isRequired
 };
 
-export default reduxForm({ form: 'registerationForm' })(RegisterationFrom);
+export default reduxForm({ form: 'registrationForm' })(RegistrationForm);
