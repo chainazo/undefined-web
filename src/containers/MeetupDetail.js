@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Moim from '../components/Moim';
-import { fetchMeetupDetail } from '../actions/index';
-// import { marked } from 'react-marked';
+import axios from 'axios';
+import moment from 'moment';
 import marked from 'react-marked';
 import Avatar from '../static/img/avatar.jpg';
 
@@ -11,94 +9,104 @@ import Avatar from '../static/img/avatar.jpg';
 class MeetupDetail extends Component {
   constructor (props) {
     super(props);
+
     this.state = {
-      detailId: this.props.match.params.id,
+      id: this.props.match.params.id,
+      title: '',
+      started_at: '',
+      ended_at: '',
+      cover_image_url: '',
+      summary: '',
+      location: '',
+      choice_type: '',
+      content: '',
+      confirmedList: [],
+      waitingList: []
     };
   }
 
   componentDidMount() {
-    this.props.fetchMeetupDetail(this.state.detailId);
+    axios.get(`/meetups/${this.state.id}`)
+      .then(res => {
+        this.setState(res.data.data);
+        return axios.get(`/meetups/${this.state.id}/attendees?state=0`);
+      })
+      .then(res => {
+        this.setState({ confirmedList: res.data.data });
+        return axios.get(`/meetups/${this.state.id}/attendees?state=1`);
+      })
+      .then(res => {
+        this.setState({ waitingList: res.data.data });
+      })
   }
 
-  renderMoim = () => {
-    return this.props.meetupDetail.map((moim) => {
-      return <li key={moim.id}><Moim moimData={moim}/></li>;
-    });
-  };
-
   renderUserConfirmed = () => {
-    return this.props.meetupDetail.confirmedList.map((user) => {
+    return this.state.confirmedList.map((user) => {
       return (
-        <div className="chip" key={user.name}>
-          <img src={Avatar} alt="Contact Person"/>{user.name}
+        <div className="chip" key={user.id}>
+          <img src={Avatar} alt="Contact Person"/>{user.display_name}
         </div>
       )
     });
   };
 
   renderUserWaiting = () => {
-    return this.props.meetupDetail.waitingList.map((user) => {
+    return this.state.waitingList.map((user) => {
       return (
-        <div className="chip" key={user.name}>
-          <img src={Avatar} alt="Contact Person"/>{user.name}
+        <div className="chip" key={user.id}>
+          <img src={Avatar} alt="Contact Person"/>{user.display_name}
         </div>
       )
     });
   };
 
-  getMarkdownText() {
-    const rawMarkup = marked('This is _Markdown_.', {sanitize: true});
-    return { __html: rawMarkup };
-  }
-
   render () {
-    const detail = this.props.meetupDetail;
+    const detail = this.state;
     return (
       <div className="container container-body">
         <div className="meetup-title-section">
           <div className="meetup-title">{detail.title}</div>
-          <div className="meetup-user">
+          {/* <div className="meetup-user">
             by {detail.user.name}<img className="user-thumbnail circle" src={detail.user.photo}/>
-          </div>
+          </div> */}
           <div className="meetup-summary">{detail.summary}</div>
         </div>
 
         <div className="row meetup-box">
           <div className="col s12 m5">
-            <img className="meetup-thumbnail img-responsive" src={detail.thumbnail}/>
+            <img className="meetup-thumbnail img-responsive" src={detail.cover_image_url}/>
           </div>
           <div className="col s12 m7">
             <table>
               <tbody>
               <tr>
-                <td>모임 일자</td>
-                <td>{detail.date}</td>
-              </tr>
-              <tr>
-                <td>등록 기간</td>
-                <td>2017년 9월 1일 12:00 ~ 2017년 9월 7일 6:00</td>
+                <td>모임 기간</td>
+                <td>{moment(detail.started_at).format('YYYY-MM-DD A hh:mm')} ~ {moment(detail.ended_at).format('YYYY-MM-DD A hh:mm')}</td>
               </tr>
               <tr>
                 <td>장소</td>
                 <td>{detail.location}</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td>참가 인원</td>
                 <td>{detail.number}</td>
-              </tr>
+              </tr> */}
               <tr>
                 <td>모집 방법</td>
-                <td>{detail.type}</td>
+                <td>{detail.choice_type}</td>
               </tr>
               </tbody>
             </table>
+            <div className="row">
+              <button className="waves-effect waves-light btn">모임 참가하기</button>
+            </div>
           </div>
 
 
           <div className="col s12">
             <h2>내용</h2>
             <div className="meetup-contents">
-              { marked(detail.contents) }
+              { marked(detail.content) }
             </div>
           </div>
           <div className="col s12">
@@ -114,8 +122,4 @@ class MeetupDetail extends Component {
   }
 }
 
-export default connect((state) => {
-  return {
-    meetupDetail: state.lists.meetupDetail
-  };
-}, { fetchMeetupDetail })(MeetupDetail);
+export default MeetupDetail;
