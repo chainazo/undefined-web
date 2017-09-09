@@ -12,7 +12,7 @@ export default ({ moim }) => {
             <i className="material-icons">&#xE87D;</i>
             <div className="count">{moim.like}</div>
           </div>
-          <p className="date">{moim.moimDate}</p>
+          <p className="date">{moim.date}</p>
         </div>
       </div>
     </div>
