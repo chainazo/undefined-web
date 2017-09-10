@@ -13,7 +13,7 @@ class Registration extends Component {
 	handleSubmit = data => {
 		axios.post('/users', data)
 			.then(res => {
-				console.log(res);
+				this.props.onSignup(res.data.data);
 			});
 	};
 

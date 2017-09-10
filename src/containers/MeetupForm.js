@@ -20,16 +20,16 @@ const renderSimpleMDE = ({ input: { onChange, value } }) => (
 );
 
 class MeetupForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(data) {
-    axios.post('/meetups', data)
+    axios.post('/meetups', data, { withCredentials: true })
       .then((res) => {
-        console.log(res);
+        this.props.history.push('/');
       });
   }
 
@@ -82,8 +82,6 @@ class MeetupForm extends Component {
               <Field component={renderSimpleMDE} id="content" name="content"/>
             </div>
           </div>
-
-          <Field component="input" name="choice_type" style={{ display: 'none' }} />
 
           {/* <label>
             <Field component="input" type="radio" name="type" value="byArrive"/>

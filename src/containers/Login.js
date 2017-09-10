@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import axios from 'axios';
 
 class LoginForm extends Component {
+  constructor() {
+    super();
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(data) {
+    axios.post('/auth', data)
+      .then(res => {
+        this.props.onLogin(res.data.data);
+      });
+  }
+
   render() {
     return (
       <div className="container">
-        <form className="col s6" onSubmit={this.props.handleSubmit}>
+        <form className="col s6" onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <div className="row">
             <h4>로그인</h4>
 

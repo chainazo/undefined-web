@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 
 const RegistrationForm = ({ handleSubmit, onSubmit }) => {
 	return (
-		<form className="col s6" onSubmit={handleSubmit(onSubmit)} method="POST">
+		<form className="col s6" onSubmit={handleSubmit(onSubmit)}>
 			<div className="row">
 				<h4>회원가입</h4>
 			</div>
@@ -12,8 +12,8 @@ const RegistrationForm = ({ handleSubmit, onSubmit }) => {
 			<div className="row">
 				<div className="input-field col s12">
 					<div className="box">
-						<label htmlFor="username">이름</label>
-						<Field name="username" component="input" type="text" />
+						<label htmlFor="display_name">이름</label>
+						<Field name="display_name" component="input" type="text" />
 					</div>
 				</div>
 			</div>

@@ -30,7 +30,12 @@ sagaMiddleware.run(rootSaga);
 moment.locale('ko');
 momentLocalizer();
 
-axios.defaults.baseURL = 'https://m8z7h5ngq7.execute-api.ap-northeast-2.amazonaws.com/prod';
+const authToken = window.localStorage.getItem('Authorization');
+
+axios.defaults.baseURL = 'https://zllzkerux9.execute-api.ap-northeast-2.amazonaws.com/dev';
+if (authToken) {
+	axios.defaults.headers.common['Authorization'] = authToken;
+}
 
 ReactDOM.render(
 	<Provider store={store}>

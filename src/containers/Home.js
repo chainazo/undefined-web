@@ -21,7 +21,7 @@ class Home extends Component {
   fetchMeetupList() {
     const oldList = this.state.meetupList;
 
-    axios.get(`/meetups?count=9&after=${this.state.after}`)
+    axios.get(`/meetups?count=9${this.state.after ? `&after=${this.state.after}` : ''}`)
       .then(res => {
         this.setState({
           meetupList: [ ...oldList, ...res.data.data ],
